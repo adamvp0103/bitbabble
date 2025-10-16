@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Header from '../components/Header';
-import type { Post } from '../data/types';
 import PostCard from '../components/PostCard';
 import Footer from '../components/Footer';
+import { PostContext } from '../context/PostProvider';
+import { UserContext } from '../context/UserProvider';
 
 function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { posts } = useContext(PostContext);
+  const { users } = useContext(UserContext);
+
   const [followedUserIds, setFollowedUserIds] = useState<number[]>([]);
   const [followingShowAmount, setFollowingShowAmount] = useState(3);
   const [allPostsShowAmount, setAllPostsShowAmount] = useState(3);
@@ -24,27 +25,6 @@ function Home() {
     setAllPostsShowAmount(allPostsShowAmount + 3);
   }
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const response = await fetch('https://dummyjson.com/posts');
-        if (!response.ok) {
-          throw new Error(
-            `Error fetching posts for home page - status: ${response.status}`
-          );
-        }
-        const data = await response.json();
-        setPosts(data.posts);
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchPosts();
-  }, []);
-
   return (
     <>
       <Header />
@@ -60,9 +40,16 @@ function Home() {
         <section>
           <div>
             <h2>Following</h2>
-            {followedPosts.slice(0, followingShowAmount).map(post => (
-              <PostCard post={post} />
-            ))}
+            <ul>
+              {followedPosts.slice(0, followingShowAmount).map(post => (
+                <li key={post.id}>
+                  <PostCard
+                    post={post}
+                    user={users.find(user => user.id === post.userId)!}
+                  />
+                </li>
+              ))}
+            </ul>
             {followedPosts.length > followingShowAmount && (
               <button onClick={showMoreFollowing}>Show More</button>
             )}
@@ -72,9 +59,16 @@ function Home() {
       <section>
         <div>
           <h2>All Posts</h2>
-          {posts.slice(0, allPostsShowAmount).map(post => (
-            <PostCard post={post} />
-          ))}
+          <ul>
+            {posts.slice(0, allPostsShowAmount).map(post => (
+              <li key={post.id}>
+                <PostCard
+                  post={post}
+                  user={users.find(user => user.id === post.userId)!}
+                />
+              </li>
+            ))}
+          </ul>
           {posts.length > allPostsShowAmount && (
             <button onClick={showMoreAllPosts}>Show More</button>
           )}

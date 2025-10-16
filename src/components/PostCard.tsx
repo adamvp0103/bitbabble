@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import type { Post, User } from '../data/types';
 import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
@@ -6,41 +5,17 @@ import DislikeIcon from '../icons/DislikeIcon';
 
 interface PostCardProps {
   post: Post;
+  user: User;
 }
 
-function PostCard({ post }: PostCardProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchUser(id: number) {
-      try {
-        const response = await fetch(`https://dummyjson.com/users/${id}`);
-        if (!response.ok) {
-          throw new Error(
-            `Error fetching user for post card - status: ${response.status}`
-          );
-        }
-        const data = await response.json();
-        setUser(data);
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchUser(post.userId);
-  }, []);
-
+function PostCard({ post, user }: PostCardProps) {
   return (
-    <li key={post.id}>
-      <span>{post.title}</span>
+    <article>
+      <h3>{post.title}</h3>
       <div>
         <img />
         <span>
-          {user?.firstName} {user?.lastName}
+          {user.firstName} {user.lastName}
         </span>
       </div>
       <p>{post.body}</p>
@@ -63,7 +38,7 @@ function PostCard({ post }: PostCardProps) {
           {post.reactions.dislikes}
         </div>
       </div>
-    </li>
+    </article>
   );
 }
 
