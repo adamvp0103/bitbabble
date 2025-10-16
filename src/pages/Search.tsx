@@ -56,72 +56,74 @@ function Search() {
   return (
     <>
       <Header />
-      <section>
-        <div>
-          <label htmlFor="search-input">Search</label>
+      <main>
+        <section>
           <div>
+            <label htmlFor="search-input">Search</label>
             <div>
-              <SearchIcon />
-              <input
-                id="search-input"
-                value={searchValue}
-                placeholder="Search posts or users..."
-                onChange={updateSearchValue}
-              />
+              <div>
+                <SearchIcon />
+                <input
+                  id="search-input"
+                  value={searchValue}
+                  placeholder="Search posts or users..."
+                  onChange={updateSearchValue}
+                />
+              </div>
+              <button onClick={search}>Search</button>
             </div>
-            <button onClick={search}>Search</button>
-          </div>
-        </div>
-      </section>
-      {hasSearched && (
-        <section>
-          <div>
-            <h2>Post Results</h2>
-            {postResults.length > 0 ? (
-              <>
-                <ul>
-                  {postResults.slice(0, postResultsShowAmount).map(result => (
-                    <li key={result.id}>
-                      <PostCard
-                        post={result}
-                        user={users.find(user => user.id === result.userId)!}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                {postResults.length > postResultsShowAmount && (
-                  <button onClick={showMorePostResults}>Show More</button>
-                )}
-              </>
-            ) : (
-              <span>None.</span>
-            )}
           </div>
         </section>
-      )}
-      {hasSearched && (
-        <section>
-          <div>
-            <h2>User Results</h2>
-            {userResults.length > 0 ? (
-              <>
-                <ul>
-                  {userResults.slice(0, userResultsShowAmount).map(result => (
-                    <li key={result.id}>
-                      <UserCard user={result} />
-                    </li>
-                  ))}
-                </ul>
-                {userResults.length > userResultsShowAmount && (
-                  <button onClick={showMoreUserResults}>Show More</button>
-                )}
-              </>
-            ) : (
-              <span>None.</span>
-            )}
-          </div>
-        </section>
-      )}
+        {hasSearched && (
+          <section>
+            <div>
+              <h2>Post Results</h2>
+              {postResults.length > 0 ? (
+                <>
+                  <ul>
+                    {postResults.slice(0, postResultsShowAmount).map(result => (
+                      <li key={result.id}>
+                        <PostCard
+                          post={result}
+                          user={users.find(user => user.id === result.userId)!}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  {postResults.length > postResultsShowAmount && (
+                    <button onClick={showMorePostResults}>Show More</button>
+                  )}
+                </>
+              ) : (
+                <span>None.</span>
+              )}
+            </div>
+          </section>
+        )}
+        {hasSearched && (
+          <section>
+            <div>
+              <h2>User Results</h2>
+              {userResults.length > 0 ? (
+                <>
+                  <ul>
+                    {userResults.slice(0, userResultsShowAmount).map(result => (
+                      <li key={result.id}>
+                        <UserCard user={result} />
+                      </li>
+                    ))}
+                  </ul>
+                  {userResults.length > userResultsShowAmount && (
+                    <button onClick={showMoreUserResults}>Show More</button>
+                  )}
+                </>
+              ) : (
+                <span>None.</span>
+              )}
+            </div>
+          </section>
+        )}
+      </main>
       <Footer />
     </>
   );

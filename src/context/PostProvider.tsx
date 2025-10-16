@@ -3,10 +3,12 @@ import type { Post } from '../data/types';
 
 interface PostContextType {
   posts: Post[];
+  addPost: (post: Post) => void;
 }
 
 export const PostContext = React.createContext<PostContextType>({
-  posts: []
+  posts: [],
+  addPost: () => {}
 });
 
 interface PostProviderProps {
@@ -15,6 +17,10 @@ interface PostProviderProps {
 
 function PostProvider({ children }: PostProviderProps) {
   const [posts, setPosts] = useState<Post[]>([]);
+
+  function addPost(post: Post) {
+    setPosts([...posts, post]);
+  }
 
   useEffect(() => {
     async function fetchPosts() {
@@ -34,7 +40,7 @@ function PostProvider({ children }: PostProviderProps) {
   }, []);
 
   return (
-    <PostContext.Provider value={{ posts }}>
+    <PostContext.Provider value={{ posts, addPost }}>
       {children}
     </PostContext.Provider>
   );

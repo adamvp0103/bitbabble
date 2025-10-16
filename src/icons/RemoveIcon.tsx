@@ -1,0 +1,18 @@
+function RemoveIcon() {
+  return (
+    <svg
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2 1.5H3V2.5H4V3.5H5V4.5H6V5.5H7V6.5H9V5.5H10V4.5H11V3.5H12V2.5H13V1.5H14V0.5H16V2.5H15V3.5H14V4.5H13V5.5H12V6.5H11V7.5H10V9.5H11V10.5H12V11.5H13V12.5H14V13.5H15V14.5H16V16.5H14V15.5H13V14.5H12V13.5H11V12.5H10V11.5H9V10.5H7V11.5H6V12.5H5V13.5H4V14.5H3V15.5H2V16.5H0V14.5H1V13.5H2V12.5H3V11.5H4V10.5H5V9.5H6V7.5H5V6.5H4V5.5H3V4.5H2V3.5H1V2.5H0V0.5H2V1.5Z"
+        fill="currentcolor"
+      />
+    </svg>
+  );
+}
+
+export default RemoveIcon;

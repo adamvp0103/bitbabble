@@ -24,56 +24,58 @@ function Account() {
   return (
     <>
       <Header />
-      <section>
-        <div>
-          <img />
-          <div>
-            <span>
-              {self.firstName} {self.lastName}
-            </span>
-            <span>{self.username}</span>
-          </div>
-          <div>
-            <div>
-              <AgeIcon />
-              <span>{self.age} years old</span>
-            </div>
-            <div>
-              <OccupationIcon />
-              <span>
-                {self.company.title} at {self.company.name}
-              </span>
-            </div>
-            <div>
-              <EducationIcon />
-              <span>Studied at {self.university}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div>
-          <AccountInfoForm />
-        </div>
-      </section>
-      {/* Render 'Your Posts' section only if user has posted */}
-      {userPosts.length > 0 && (
+      <main>
         <section>
           <div>
-            <h2>Your Posts</h2>
-            <ul>
-              {userPosts.slice(0, yourPostsShowAmount).map(post => (
-                <li key={post.id}>
-                  <PostCard post={post} user={self!} />
-                </li>
-              ))}
-            </ul>
-            {userPosts.length > yourPostsShowAmount && (
-              <button onClick={showMoreYourPosts}>Show More</button>
-            )}
+            <img />
+            <div>
+              <span>
+                {self.firstName} {self.lastName}
+              </span>
+              <span>{self.username}</span>
+            </div>
+            <div>
+              <div>
+                <AgeIcon />
+                <span>{self.age} years old</span>
+              </div>
+              <div>
+                <OccupationIcon />
+                <span>
+                  {self.company.title} at {self.company.name}
+                </span>
+              </div>
+              <div>
+                <EducationIcon />
+                <span>Studied at {self.university}</span>
+              </div>
+            </div>
           </div>
         </section>
-      )}
+        <section>
+          <div>
+            <AccountInfoForm />
+          </div>
+        </section>
+        {/* Render 'Your Posts' section only if user has posted */}
+        {userPosts.length > 0 && (
+          <section>
+            <div>
+              <h2>Your Posts</h2>
+              <ul>
+                {userPosts.slice(0, yourPostsShowAmount).map(post => (
+                  <li key={post.id}>
+                    <PostCard post={post} user={self!} />
+                  </li>
+                ))}
+              </ul>
+              {userPosts.length > yourPostsShowAmount && (
+                <button onClick={showMoreYourPosts}>Show More</button>
+              )}
+            </div>
+          </section>
+        )}
+      </main>
       <Footer />
     </>
   );

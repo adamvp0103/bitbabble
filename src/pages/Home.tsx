@@ -28,20 +28,40 @@ function Home() {
   return (
     <>
       <Header />
-      <section>
-        <div>
-          <span>Welcome to</span>
-          <span>BitBabble</span>
-          <span>A blog by and for developers.</span>
-        </div>
-      </section>
-      {/* Render 'Following' section only if a followed user has a post */}
-      {posts.some(post => followedUserIds.some(id => post.userId === id)) && (
+      <main>
         <section>
           <div>
-            <h2>Following</h2>
+            <span>Welcome to</span>
+            <span>BitBabble</span>
+            <span>A blog by and for developers.</span>
+          </div>
+        </section>
+        {/* Render 'Following' section only if a followed user has a post */}
+        {posts.some(post => followedUserIds.some(id => post.userId === id)) && (
+          <section>
+            <div>
+              <h2>Following</h2>
+              <ul>
+                {followedPosts.slice(0, followingShowAmount).map(post => (
+                  <li key={post.id}>
+                    <PostCard
+                      post={post}
+                      user={users.find(user => user.id === post.userId)!}
+                    />
+                  </li>
+                ))}
+              </ul>
+              {followedPosts.length > followingShowAmount && (
+                <button onClick={showMoreFollowing}>Show More</button>
+              )}
+            </div>
+          </section>
+        )}
+        <section>
+          <div>
+            <h2>All Posts</h2>
             <ul>
-              {followedPosts.slice(0, followingShowAmount).map(post => (
+              {posts.slice(0, allPostsShowAmount).map(post => (
                 <li key={post.id}>
                   <PostCard
                     post={post}
@@ -50,30 +70,12 @@ function Home() {
                 </li>
               ))}
             </ul>
-            {followedPosts.length > followingShowAmount && (
-              <button onClick={showMoreFollowing}>Show More</button>
+            {posts.length > allPostsShowAmount && (
+              <button onClick={showMoreAllPosts}>Show More</button>
             )}
           </div>
         </section>
-      )}
-      <section>
-        <div>
-          <h2>All Posts</h2>
-          <ul>
-            {posts.slice(0, allPostsShowAmount).map(post => (
-              <li key={post.id}>
-                <PostCard
-                  post={post}
-                  user={users.find(user => user.id === post.userId)!}
-                />
-              </li>
-            ))}
-          </ul>
-          {posts.length > allPostsShowAmount && (
-            <button onClick={showMoreAllPosts}>Show More</button>
-          )}
-        </div>
-      </section>
+      </main>
       <Footer />
     </>
   );
