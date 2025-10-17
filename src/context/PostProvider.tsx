@@ -4,11 +4,13 @@ import type { Post } from '../data/types';
 interface PostContextType {
   posts: Post[];
   addPost: (post: Post) => void;
+  getPost: (id: number | string) => Post | undefined;
 }
 
 export const PostContext = React.createContext<PostContextType>({
   posts: [],
-  addPost: () => {}
+  addPost: () => {},
+  getPost: () => undefined
 });
 
 interface PostProviderProps {
@@ -20,6 +22,10 @@ function PostProvider({ children }: PostProviderProps) {
 
   function addPost(post: Post) {
     setPosts([...posts, post]);
+  }
+
+  function getPost(id: number | string) {
+    return posts.find(post => String(post.id) === String(id));
   }
 
   useEffect(() => {
@@ -40,7 +46,7 @@ function PostProvider({ children }: PostProviderProps) {
   }, []);
 
   return (
-    <PostContext.Provider value={{ posts, addPost }}>
+    <PostContext.Provider value={{ posts, addPost, getPost }}>
       {children}
     </PostContext.Provider>
   );

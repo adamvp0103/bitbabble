@@ -3,10 +3,12 @@ import type { User } from '../data/types';
 
 interface UserContextType {
   users: User[];
+  getUser: (id: number) => User | undefined;
 }
 
 export const UserContext = React.createContext<UserContextType>({
-  users: []
+  users: [],
+  getUser: () => undefined
 });
 
 interface UserProviderProps {
@@ -15,6 +17,10 @@ interface UserProviderProps {
 
 function UserProvider({ children }: UserProviderProps) {
   const [users, setUsers] = useState<User[]>([]);
+
+  function getUser(id: number) {
+    return users.find(user => user.id === id);
+  }
 
   useEffect(() => {
     async function fetchUsers() {
@@ -36,7 +42,7 @@ function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ users }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ users, getUser }}>{children}</UserContext.Provider>
   );
 }
 

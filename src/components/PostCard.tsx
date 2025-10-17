@@ -2,6 +2,7 @@ import type { Post, User } from '../data/types';
 import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
 import DislikeIcon from '../icons/DislikeIcon';
+import { useNavigate } from 'react-router-dom';
 
 interface PostCardProps {
   post: Post;
@@ -9,8 +10,10 @@ interface PostCardProps {
 }
 
 function PostCard({ post, user }: PostCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <article>
+    <article onClick={() => navigate(`/post/${post.id}`)}>
       <h3>{post.title}</h3>
       <div>
         <img />
