@@ -5,12 +5,14 @@ interface PostContextType {
   posts: Post[];
   addPost: (post: Post) => void;
   getPost: (id: number | string) => Post | undefined;
+  getPostsByUser: (id: number) => Post[];
 }
 
 export const PostContext = React.createContext<PostContextType>({
   posts: [],
   addPost: () => {},
-  getPost: () => undefined
+  getPost: () => undefined,
+  getPostsByUser: () => []
 });
 
 interface PostProviderProps {
@@ -26,6 +28,10 @@ function PostProvider({ children }: PostProviderProps) {
 
   function getPost(id: number | string) {
     return posts.find(post => String(post.id) === String(id));
+  }
+
+  function getPostsByUser(id: number) {
+    return posts.filter(post => post.userId === id);
   }
 
   useEffect(() => {
@@ -46,7 +52,7 @@ function PostProvider({ children }: PostProviderProps) {
   }, []);
 
   return (
-    <PostContext.Provider value={{ posts, addPost, getPost }}>
+    <PostContext.Provider value={{ posts, addPost, getPost, getPostsByUser }}>
       {children}
     </PostContext.Provider>
   );

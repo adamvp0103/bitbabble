@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import type { User } from '../data/types';
 
 interface UserCardProps {
@@ -5,8 +6,10 @@ interface UserCardProps {
 }
 
 function UserCard({ user }: UserCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <article>
+    <article onClick={() => navigate(`/user/${user.id}`)}>
       <div>
         <img />
         <div>

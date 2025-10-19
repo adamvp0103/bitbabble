@@ -8,7 +8,7 @@ import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
 import DislikeIcon from '../icons/DislikeIcon';
 
-function Post() {
+function PostDetail() {
   const { getPost } = useContext(PostContext);
   const { getUser } = useContext(UserContext);
   const { id } = useParams();
@@ -68,4 +68,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default PostDetail;

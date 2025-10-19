@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Account from './pages/Account';
 import NewPost from './pages/NewPost';
-import Post from './pages/Post';
+import PostDetail from './pages/PostDetail';
+import UserDetail from './pages/UserDetail';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/account" element={<Account />} />
         <Route path="/new-post" element={<NewPost />} />
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/post/:id" element={<PostDetail />} />
+        <Route path="/user/:id" element={<UserDetail />} />
       </Routes>
     </BrowserRouter>
   );
