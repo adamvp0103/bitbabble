@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { useContext } from 'react';
@@ -7,11 +7,15 @@ import { UserContext } from '../context/UserProvider';
 import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
 import DislikeIcon from '../icons/DislikeIcon';
+import { SelfContext } from '../context/SelfProvider';
 
 function PostDetail() {
   const { getPost } = useContext(PostContext);
   const { getUser } = useContext(UserContext);
+  const { self } = useContext(SelfContext);
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const postNotFound = (
     <>
@@ -37,7 +41,13 @@ function PostDetail() {
     return postNotFound;
   }
 
-  const user = getUser(post.userId);
+  let user;
+
+  if (post.userId === self.id) {
+    user = self;
+  } else {
+    user = getUser(post.userId);
+  }
 
   return (
     <>
@@ -48,7 +58,7 @@ function PostDetail() {
             <h2>{post.title}</h2>
             <div>
               {user ? (
-                <div>
+                <div onClick={() => navigate(`/user/${user.id}`)}>
                   <img />
                   <div>
                     <span>

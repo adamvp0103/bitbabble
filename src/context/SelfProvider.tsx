@@ -4,6 +4,8 @@ import type { User } from '../data/types';
 interface SelfContextType {
   self: User;
   setSelf: (user: User) => void;
+  followed: number[];
+  toggleFollow: (id: number) => void;
 }
 
 export const SelfContext = React.createContext<SelfContextType>({
@@ -19,7 +21,9 @@ export const SelfContext = React.createContext<SelfContextType>({
       title: 'Worker'
     }
   },
-  setSelf: () => {}
+  setSelf: () => {},
+  followed: [],
+  toggleFollow: () => {}
 });
 
 interface SelfProviderProps {
@@ -40,8 +44,20 @@ function SelfProvider({ children }: SelfProviderProps) {
     }
   });
 
+  const [followed, setFollowed] = useState<number[]>([]);
+
+  function toggleFollow(id: number) {
+    if (followed.includes(id)) {
+      // Unfollow
+      setFollowed(followed.filter(userId => userId !== id));
+    } else {
+      // Follow
+      setFollowed([...followed, id]);
+    }
+  }
+
   return (
-    <SelfContext.Provider value={{ self, setSelf }}>
+    <SelfContext.Provider value={{ self, setSelf, followed, toggleFollow }}>
       {children}
     </SelfContext.Provider>
   );

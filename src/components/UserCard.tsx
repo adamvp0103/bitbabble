@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { User } from '../data/types';
+import { useContext } from 'react';
+import { SelfContext } from '../context/SelfProvider';
 
 interface UserCardProps {
   user: User;
@@ -7,6 +9,8 @@ interface UserCardProps {
 
 function UserCard({ user }: UserCardProps) {
   const navigate = useNavigate();
+
+  const { followed, toggleFollow } = useContext(SelfContext);
 
   return (
     <article onClick={() => navigate(`/user/${user.id}`)}>
@@ -19,7 +23,9 @@ function UserCard({ user }: UserCardProps) {
           <span>{user.username}</span>
         </div>
       </div>
-      <button>Follow</button>
+      <button onClick={() => toggleFollow(user.id)}>
+        {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
+      </button>
     </article>
   );
 }

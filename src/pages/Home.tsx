@@ -3,16 +3,17 @@ import Header from '../components/Header';
 import PostCard from '../components/PostCard';
 import Footer from '../components/Footer';
 import { PostContext } from '../context/PostProvider';
+import { SelfContext } from '../context/SelfProvider';
 
 function Home() {
   const { posts } = useContext(PostContext);
+  const { followed } = useContext(SelfContext);
 
-  const [followedUserIds, setFollowedUserIds] = useState<number[]>([]);
   const [followingShowAmount, setFollowingShowAmount] = useState(3);
   const [allPostsShowAmount, setAllPostsShowAmount] = useState(3);
 
   const followedPosts = posts.filter(post =>
-    followedUserIds.some(id => post.userId === id)
+    followed.includes(post.userId)
   );
 
   function showMoreFollowing() {
@@ -35,7 +36,7 @@ function Home() {
           </div>
         </section>
         {/* Render 'Following' section only if a followed user has a post */}
-        {posts.some(post => followedUserIds.some(id => post.userId === id)) && (
+        {followedPosts.length > 0 && (
           <section>
             <div>
               <h2>Following</h2>

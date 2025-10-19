@@ -8,10 +8,12 @@ import OccupationIcon from '../icons/OccupationIcon';
 import EducationIcon from '../icons/EducationIcon';
 import { PostContext } from '../context/PostProvider';
 import PostCard from '../components/PostCard';
+import { SelfContext } from '../context/SelfProvider';
 
 function UserDetail() {
   const { getUser } = useContext(UserContext);
   const { getPostsByUser } = useContext(PostContext);
+  const { followed, toggleFollow } = useContext(SelfContext);
   const { id } = useParams();
 
   const [postsShowAmount, setPostsShowAmount] = useState(3);
@@ -36,6 +38,9 @@ function UserDetail() {
                   {user.firstName} {user.lastName}
                 </h2>
                 <span>{user.username}</span>
+                <button onClick={() => toggleFollow(user.id)}>
+                  {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
+                </button>
               </div>
               <div>
                 <div>
