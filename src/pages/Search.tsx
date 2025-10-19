@@ -85,7 +85,6 @@ function Search() {
                       <li key={result.id}>
                         <PostCard
                           post={result}
-                          user={users.find(user => user.id === result.userId)!}
                         />
                       </li>
                     ))}

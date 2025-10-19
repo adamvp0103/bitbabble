@@ -13,8 +13,31 @@ function PostDetail() {
   const { getUser } = useContext(UserContext);
   const { id } = useParams();
 
-  const post = id ? getPost(id) : null;
-  const user = post ? getUser(post.userId) : null;
+  const postNotFound = (
+    <>
+      <Header />
+      <main>
+        <section>
+          <div>
+            <h2>Post not found</h2>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+
+  if (!id) {
+    return postNotFound;
+  }
+
+  const post = getPost(id);
+
+  if (!post) {
+    return postNotFound;
+  }
+
+  const user = getUser(post.userId);
 
   return (
     <>
@@ -22,44 +45,42 @@ function PostDetail() {
       <main>
         <section>
           <div>
-            {post ? (
-              <>
-                <h2>{post.title}</h2>
+            <h2>{post.title}</h2>
+            <div>
+              {user ? (
                 <div>
+                  <img />
                   <div>
-                    <img />
-                    <div>
-                      <span>
-                        {user?.firstName} {user?.lastName}
-                      </span>
-                      <span>{user?.username}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <ViewIcon />
-                      {post.views}
-                    </div>
-                    <div>
-                      <LikeIcon />
-                      {post.reactions.likes}
-                    </div>
-                    <div>
-                      <DislikeIcon />
-                      {post.reactions.dislikes}
-                    </div>
+                    <span>
+                      {user.firstName} {user.lastName}
+                    </span>
+                    <span>{user.username}</span>
                   </div>
                 </div>
-                <ul>
-                  {post.tags.map(tag => (
-                    <li key={tag}>{tag.toUpperCase()}</li>
-                  ))}
-                </ul>
-                <p>{post.body}</p>
-              </>
-            ) : (
-              <h2>Post not found</h2>
-            )}
+              ) : (
+                <span>User not found</span>
+              )}
+              <div>
+                <div>
+                  <ViewIcon />
+                  {post.views}
+                </div>
+                <div>
+                  <LikeIcon />
+                  {post.reactions.likes}
+                </div>
+                <div>
+                  <DislikeIcon />
+                  {post.reactions.dislikes}
+                </div>
+              </div>
+            </div>
+            <ul>
+              {post.tags.map(tag => (
+                <li key={tag}>{tag.toUpperCase()}</li>
+              ))}
+            </ul>
+            <p>{post.body}</p>
           </div>
         </section>
       </main>

@@ -3,11 +3,9 @@ import Header from '../components/Header';
 import PostCard from '../components/PostCard';
 import Footer from '../components/Footer';
 import { PostContext } from '../context/PostProvider';
-import { UserContext } from '../context/UserProvider';
 
 function Home() {
   const { posts } = useContext(PostContext);
-  const { users } = useContext(UserContext);
 
   const [followedUserIds, setFollowedUserIds] = useState<number[]>([]);
   const [followingShowAmount, setFollowingShowAmount] = useState(3);
@@ -44,10 +42,7 @@ function Home() {
               <ul>
                 {followedPosts.slice(0, followingShowAmount).map(post => (
                   <li key={post.id}>
-                    <PostCard
-                      post={post}
-                      user={users.find(user => user.id === post.userId)!}
-                    />
+                    <PostCard post={post} />
                   </li>
                 ))}
               </ul>
@@ -63,10 +58,7 @@ function Home() {
             <ul>
               {posts.slice(0, allPostsShowAmount).map(post => (
                 <li key={post.id}>
-                  <PostCard
-                    post={post}
-                    user={users.find(user => user.id === post.userId)!}
-                  />
+                  <PostCard post={post} />
                 </li>
               ))}
             </ul>

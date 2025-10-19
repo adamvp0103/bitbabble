@@ -11,11 +11,11 @@ import AccountInfoForm from '../components/AccountInfoForm';
 
 function Account() {
   const { self } = useContext(SelfContext);
-  const { posts } = useContext(PostContext);
+  const { getPostsByUser } = useContext(PostContext);
 
   const [yourPostsShowAmount, setYourPostsShowAmount] = useState(3);
 
-  const userPosts = posts.filter(post => post.userId === self.id);
+  const posts = getPostsByUser(self.id);
 
   function showMoreYourPosts() {
     setYourPostsShowAmount(yourPostsShowAmount + 3);
@@ -58,18 +58,18 @@ function Account() {
           </div>
         </section>
         {/* Render 'Your Posts' section only if user has posted */}
-        {userPosts.length > 0 && (
+        {posts.length > 0 && (
           <section>
             <div>
               <h2>Your Posts</h2>
               <ul>
-                {userPosts.slice(0, yourPostsShowAmount).map(post => (
+                {posts.slice(0, yourPostsShowAmount).map(post => (
                   <li key={post.id}>
-                    <PostCard post={post} user={self!} />
+                    <PostCard post={post} />
                   </li>
                 ))}
               </ul>
-              {userPosts.length > yourPostsShowAmount && (
+              {posts.length > yourPostsShowAmount && (
                 <button onClick={showMoreYourPosts}>Show More</button>
               )}
             </div>

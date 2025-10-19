@@ -68,7 +68,7 @@ function UserDetail() {
               <ul>
                 {userPosts.slice(0, postsShowAmount).map(post => (
                   <li key={post.id}>
-                    <PostCard post={post} user={user} />
+                    <PostCard post={post} />
                   </li>
                 ))}
               </ul>
