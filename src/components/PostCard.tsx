@@ -1,5 +1,4 @@
 import type { Post } from '../data/types';
-import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
 import DislikeIcon from '../icons/DislikeIcon';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,8 @@ interface PostCardProps {
 function PostCard({ post }: PostCardProps) {
   const navigate = useNavigate();
   const { getUser } = useContext(UserContext);
-  const { self } = useContext(SelfContext);
+  const { self, isLiked, isDisliked, toggleLiked, toggleDisliked } =
+    useContext(SelfContext);
 
   let user;
 
@@ -44,15 +44,23 @@ function PostCard({ post }: PostCardProps) {
         ))}
       </ul>
       <div>
-        <div>
-          <ViewIcon />
-          {post.views}
-        </div>
-        <div>
+        <div
+          style={{ color: isLiked(post.id) ? 'green' : 'black' }}
+          onClick={event => {
+            event.stopPropagation();
+            toggleLiked(post.id);
+          }}
+        >
           <LikeIcon />
           {post.reactions.likes}
         </div>
-        <div>
+        <div
+          style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
+          onClick={event => {
+            event.stopPropagation();
+            toggleDisliked(post.id);
+          }}
+        >
           <DislikeIcon />
           {post.reactions.dislikes}
         </div>

@@ -7,14 +7,12 @@ import { SelfContext } from '../context/SelfProvider';
 
 function Home() {
   const { posts } = useContext(PostContext);
-  const { followed } = useContext(SelfContext);
+  const { followedUsers: followed } = useContext(SelfContext);
 
   const [followingShowAmount, setFollowingShowAmount] = useState(3);
   const [allPostsShowAmount, setAllPostsShowAmount] = useState(3);
 
-  const followedPosts = posts.filter(post =>
-    followed.includes(post.userId)
-  );
+  const followedPosts = posts.filter(post => followed.includes(post.userId));
 
   function showMoreFollowing() {
     setFollowingShowAmount(followingShowAmount + 3);

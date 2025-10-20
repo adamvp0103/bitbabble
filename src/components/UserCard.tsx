@@ -10,7 +10,7 @@ interface UserCardProps {
 function UserCard({ user }: UserCardProps) {
   const navigate = useNavigate();
 
-  const { followed, toggleFollow } = useContext(SelfContext);
+  const { followedUsers: followed, toggleFollow } = useContext(SelfContext);
 
   return (
     <article onClick={() => navigate(`/user/${user.id}`)}>

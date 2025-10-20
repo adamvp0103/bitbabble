@@ -13,7 +13,7 @@ import { SelfContext } from '../context/SelfProvider';
 function UserDetail() {
   const { getUser } = useContext(UserContext);
   const { getPostsByUser } = useContext(PostContext);
-  const { followed, toggleFollow } = useContext(SelfContext);
+  const { followedUsers: followed, toggleFollow } = useContext(SelfContext);
   const { id } = useParams();
 
   const [postsShowAmount, setPostsShowAmount] = useState(3);

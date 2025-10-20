@@ -4,19 +4,40 @@ import type { Post } from '../data/types';
 interface PostContextType {
   posts: Post[];
   addPost: (post: Post) => void;
-  getPost: (id: number | string) => Post | undefined;
+  getPost: (id: string) => Post | undefined;
   getPostsByUser: (id: number) => Post[];
+  addLike: (id: string) => void;
+  addDislike: (id: string) => void;
+  removeLike: (id: string) => void;
+  removeDislike: (id: string) => void;
 }
 
 export const PostContext = React.createContext<PostContextType>({
   posts: [],
   addPost: () => {},
   getPost: () => undefined,
-  getPostsByUser: () => []
+  getPostsByUser: () => [],
+  addLike: () => {},
+  addDislike: () => {},
+  removeLike: () => {},
+  removeDislike: () => {}
 });
 
 interface PostProviderProps {
   children: ReactNode;
+}
+
+interface RawPost {
+  id: number;
+  title: string;
+  body: string;
+  tags: string[];
+  reactions: {
+    likes: number;
+    dislikes: number;
+  };
+  views: number;
+  userId: number;
 }
 
 function PostProvider({ children }: PostProviderProps) {
@@ -34,6 +55,46 @@ function PostProvider({ children }: PostProviderProps) {
     return posts.filter(post => post.userId === id);
   }
 
+  function addLike(id: string) {
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+      return;
+    }
+
+    post.reactions.likes++;
+  }
+
+  function addDislike(id: string) {
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+      return;
+    }
+
+    post.reactions.dislikes++;
+  }
+
+  function removeLike(id: string) {
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+      return;
+    }
+
+    post.reactions.likes--;
+  }
+
+  function removeDislike(id: string) {
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+      return;
+    }
+
+    post.reactions.dislikes--;
+  }
+
   useEffect(() => {
     async function fetchPosts() {
       try {
@@ -42,7 +103,15 @@ function PostProvider({ children }: PostProviderProps) {
           throw new Error(`Error fetching posts - status: ${response.status}`);
         }
         const data = await response.json();
-        setPosts(data.posts);
+        const rawPostData: RawPost[] = data.posts;
+
+        // Convert numerical post IDs to strings
+        const postData = rawPostData.map(post => ({
+          ...post,
+          id: String(post.id)
+        }));
+
+        setPosts(postData);
       } catch (error: any) {
         console.error(error.message);
       }
@@ -52,7 +121,18 @@ function PostProvider({ children }: PostProviderProps) {
   }, []);
 
   return (
-    <PostContext.Provider value={{ posts, addPost, getPost, getPostsByUser }}>
+    <PostContext.Provider
+      value={{
+        posts,
+        addPost,
+        getPost,
+        getPostsByUser,
+        addLike,
+        addDislike,
+        removeLike,
+        removeDislike
+      }}
+    >
       {children}
     </PostContext.Provider>
   );

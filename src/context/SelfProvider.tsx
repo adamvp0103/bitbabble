@@ -1,11 +1,16 @@
-import React, { useState, type ReactNode } from 'react';
+import React, { useContext, useState, type ReactNode } from 'react';
 import type { User } from '../data/types';
+import { PostContext } from './PostProvider';
 
 interface SelfContextType {
   self: User;
   setSelf: (user: User) => void;
-  followed: number[];
+  followedUsers: number[];
   toggleFollow: (id: number) => void;
+  isLiked: (id: string) => boolean;
+  isDisliked: (id: string) => boolean;
+  toggleLiked: (id: string) => void;
+  toggleDisliked: (id: string) => void;
 }
 
 export const SelfContext = React.createContext<SelfContextType>({
@@ -22,8 +27,12 @@ export const SelfContext = React.createContext<SelfContextType>({
     }
   },
   setSelf: () => {},
-  followed: [],
-  toggleFollow: () => {}
+  followedUsers: [],
+  toggleFollow: () => {},
+  isLiked: () => false,
+  isDisliked: () => false,
+  toggleLiked: () => {},
+  toggleDisliked: () => {}
 });
 
 interface SelfProviderProps {
@@ -31,6 +40,9 @@ interface SelfProviderProps {
 }
 
 function SelfProvider({ children }: SelfProviderProps) {
+  const { addLike, addDislike, removeLike, removeDislike } =
+    useContext(PostContext);
+
   const [self, setSelf] = useState<User>({
     id: 0,
     firstName: 'John',
@@ -44,20 +56,73 @@ function SelfProvider({ children }: SelfProviderProps) {
     }
   });
 
-  const [followed, setFollowed] = useState<number[]>([]);
+  const [followedUsers, setFollowedUsers] = useState<number[]>([]);
+  const [likedPosts, setLikedPosts] = useState<string[]>([]);
+  const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
 
   function toggleFollow(id: number) {
-    if (followed.includes(id)) {
+    if (followedUsers.includes(id)) {
       // Unfollow
-      setFollowed(followed.filter(userId => userId !== id));
+      setFollowedUsers(followedUsers.filter(userId => userId !== id));
     } else {
       // Follow
-      setFollowed([...followed, id]);
+      setFollowedUsers([...followedUsers, id]);
+    }
+  }
+
+  function isLiked(id: string) {
+    return likedPosts.includes(id);
+  }
+
+  function isDisliked(id: string) {
+    return dislikedPosts.includes(id);
+  }
+
+  function toggleLiked(id: string) {
+    if (likedPosts.includes(id)) {
+      // Unlike
+      setLikedPosts(likedPosts.filter(postId => postId !== id));
+      removeLike(id);
+    } else {
+      // Ensure not disliked, then like
+      if (dislikedPosts.includes(id)) {
+        setDislikedPosts(dislikedPosts.filter(postId => postId !== id));
+        removeDislike(id);
+      }
+      setLikedPosts([...likedPosts, id]);
+      addLike(id);
+    }
+  }
+
+  function toggleDisliked(id: string) {
+    if (dislikedPosts.includes(id)) {
+      // Undislike
+      setDislikedPosts(dislikedPosts.filter(postId => postId !== id));
+      removeDislike(id);
+    } else {
+      // Ensure not liked, then dislike
+      if (likedPosts.includes(id)) {
+        setLikedPosts(likedPosts.filter(postId => postId !== id));
+        removeLike(id);
+      }
+      setDislikedPosts([...dislikedPosts, id]);
+      addDislike(id);
     }
   }
 
   return (
-    <SelfContext.Provider value={{ self, setSelf, followed, toggleFollow }}>
+    <SelfContext.Provider
+      value={{
+        self,
+        setSelf,
+        followedUsers,
+        toggleFollow,
+        isLiked,
+        isDisliked,
+        toggleLiked,
+        toggleDisliked
+      }}
+    >
       {children}
     </SelfContext.Provider>
   );

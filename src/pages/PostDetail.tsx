@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import { useContext } from 'react';
 import { PostContext } from '../context/PostProvider';
 import { UserContext } from '../context/UserProvider';
-import ViewIcon from '../icons/ViewIcon';
 import LikeIcon from '../icons/LikeIcon';
 import DislikeIcon from '../icons/DislikeIcon';
 import { SelfContext } from '../context/SelfProvider';
@@ -12,7 +11,8 @@ import { SelfContext } from '../context/SelfProvider';
 function PostDetail() {
   const { getPost } = useContext(PostContext);
   const { getUser } = useContext(UserContext);
-  const { self } = useContext(SelfContext);
+  const { self, isLiked, isDisliked, toggleLiked, toggleDisliked } =
+    useContext(SelfContext);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -71,15 +71,23 @@ function PostDetail() {
                 <span>User not found</span>
               )}
               <div>
-                <div>
-                  <ViewIcon />
-                  {post.views}
-                </div>
-                <div>
+                <div
+                  style={{ color: isLiked(post.id) ? 'green' : 'black' }}
+                  onClick={event => {
+                    event.stopPropagation();
+                    toggleLiked(post.id);
+                  }}
+                >
                   <LikeIcon />
                   {post.reactions.likes}
                 </div>
-                <div>
+                <div
+                  style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
+                  onClick={event => {
+                    event.stopPropagation();
+                    toggleDisliked(post.id);
+                  }}
+                >
                   <DislikeIcon />
                   {post.reactions.dislikes}
                 </div>
