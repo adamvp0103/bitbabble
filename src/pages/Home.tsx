@@ -26,10 +26,10 @@ function Home() {
     <>
       <Header />
       <main>
-        <section>
-          <div>
+        <section className="hero-section">
+          <div className="hero-content">
             <span>Welcome to</span>
-            <span>BitBabble</span>
+            <span className="hero-title">BitBabble</span>
             <span>A blog by and for developers.</span>
           </div>
         </section>

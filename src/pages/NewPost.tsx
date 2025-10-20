@@ -1,7 +1,7 @@
 import { useContext, useState, type FormEvent } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import RemoveIcon from '../icons/RemoveIcon';
+import XIcon from '../icons/XIcon';
 import { PostContext } from '../context/PostProvider';
 import { SelfContext } from '../context/SelfProvider';
 import { useNavigate } from 'react-router-dom';
@@ -109,7 +109,7 @@ function NewPost() {
                 <ul>
                   {tagList.map(tag => (
                     <li key={tag} onClick={() => removeTag(tag)}>
-                      <RemoveIcon />
+                      <XIcon />
                       {tag}
                     </li>
                   ))}

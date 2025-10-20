@@ -1,4 +1,4 @@
-function RemoveIcon() {
+function XIcon() {
   return (
     <svg
       width="16"
@@ -15,4 +15,4 @@ function RemoveIcon() {
   );
 }
 
-export default RemoveIcon;
+export default XIcon;
