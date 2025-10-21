@@ -18,9 +18,9 @@ function PostDetail() {
   const navigate = useNavigate();
 
   const postNotFound = (
-    <>
+    <div className="page">
       <Header />
-      <main>
+      <main className="main-content">
         <section>
           <div>
             <h2>Post not found</h2>
@@ -28,7 +28,7 @@ function PostDetail() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 
   if (!id) {
@@ -50,9 +50,9 @@ function PostDetail() {
   }
 
   return (
-    <>
+    <div className="page">
       <Header />
-      <main>
+      <main className="main-content">
         <section>
           <div>
             <h2>{post.title}</h2>
@@ -103,7 +103,7 @@ function PostDetail() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

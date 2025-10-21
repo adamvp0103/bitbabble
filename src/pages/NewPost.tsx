@@ -53,9 +53,9 @@ function NewPost() {
   }
 
   return (
-    <>
+    <div className='page'>
       <Header />
-      <main>
+      <main className='main-content'>
         <section>
           <div>
             <h2>New Post</h2>
@@ -121,7 +121,7 @@ function NewPost() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

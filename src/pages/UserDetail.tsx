@@ -26,9 +26,9 @@ function UserDetail() {
   const userPosts = user ? getPostsByUser(user.id) : [];
 
   return (
-    <>
+    <div className="page">
       <Header />
-      <main>
+      <main className="main-content">
         <section>
           {user ? (
             <div>
@@ -85,7 +85,7 @@ function UserDetail() {
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

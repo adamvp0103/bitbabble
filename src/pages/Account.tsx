@@ -22,9 +22,9 @@ function Account() {
   }
 
   return (
-    <>
+    <div className="page">
       <Header />
-      <main>
+      <main className="main-content">
         <section>
           <div>
             <img />
@@ -77,7 +77,7 @@ function Account() {
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

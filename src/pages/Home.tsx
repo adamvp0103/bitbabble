@@ -23,9 +23,9 @@ function Home() {
   }
 
   return (
-    <>
+    <div className="page">
       <Header />
-      <main>
+      <main className="main-content">
         <section className="hero-section">
           <div className="hero-content">
             <span>Welcome to</span>
@@ -70,7 +70,7 @@ function Home() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

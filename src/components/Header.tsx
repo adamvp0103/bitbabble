@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '../icons/MenuIcon';
 import { useState } from 'react';
 import XIcon from '../icons/XIcon';
 
 function Header() {
+  const navigate = useNavigate();
+
   const [showNav, setShowNav] = useState(false);
 
   return (
     <header className="header">
-      <h1 className="wordmark">BitBabble</h1>
+      <h1 className="wordmark" onClick={() => navigate('/')}>
+        BitBabble
+      </h1>
       <button className="nav-button" onClick={() => setShowNav(!showNav)}>
         {showNav ? <XIcon /> : <MenuIcon />}
       </button>

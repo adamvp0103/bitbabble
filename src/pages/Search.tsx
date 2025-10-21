@@ -54,58 +54,66 @@ function Search() {
   }
 
   return (
-    <>
+    <div className="page">
       <Header />
-      <main>
-        <section>
-          <div>
-            <label htmlFor="search-input">Search</label>
-            <div>
-              <div>
+      <main className="main-content">
+        <section className="section">
+          <div className="section-content">
+            <label className="heading" htmlFor="search-input">
+              Search
+            </label>
+            <div className="search-bar">
+              <div className="search-field">
                 <SearchIcon />
                 <input
                   id="search-input"
+                  className="search-input"
                   value={searchValue}
                   placeholder="Search posts or users..."
                   onChange={updateSearchValue}
                 />
               </div>
-              <button onClick={search}>Search</button>
+              <button className="search-button" onClick={search}>
+                Search
+              </button>
             </div>
           </div>
         </section>
         {hasSearched && (
-          <section>
-            <div>
-              <h2>Post Results</h2>
+          <section className="section">
+            <div className="section-content">
+              <h2 className="heading">Post Results</h2>
               {postResults.length > 0 ? (
                 <>
-                  <ul>
+                  <ul className="card-list">
                     {postResults.slice(0, postResultsShowAmount).map(result => (
                       <li key={result.id}>
-                        <PostCard
-                          post={result}
-                        />
+                        <PostCard post={result} />
                       </li>
                     ))}
                   </ul>
                   {postResults.length > postResultsShowAmount && (
-                    <button onClick={showMorePostResults}>Show More</button>
+                    <button
+                      className="show-more-button"
+                      onClick={showMorePostResults}
+                    >
+                      Show More
+                    </button>
                   )}
                 </>
               ) : (
-                <span>None.</span>
+                <span className="no-results-message">None.</span>
               )}
             </div>
           </section>
         )}
         {hasSearched && (
-          <section>
-            <div>
-              <h2>User Results</h2>
+          <section className="section">
+            <div className="section-content">
+              <h2 className="heading">User Results</h2>
               {userResults.length > 0 ? (
                 <>
-                  <ul>
+                  <ul className="card-list">
                     {userResults.slice(0, userResultsShowAmount).map(result => (
                       <li key={result.id}>
                         <UserCard user={result} />
@@ -113,18 +121,23 @@ function Search() {
                     ))}
                   </ul>
                   {userResults.length > userResultsShowAmount && (
-                    <button onClick={showMoreUserResults}>Show More</button>
+                    <button
+                      className="show-more-button"
+                      onClick={showMoreUserResults}
+                    >
+                      Show More
+                    </button>
                   )}
                 </>
               ) : (
-                <span>None.</span>
+                <span className="no-results-message">None.</span>
               )}
             </div>
           </section>
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

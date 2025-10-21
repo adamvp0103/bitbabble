@@ -13,17 +13,23 @@ function UserCard({ user }: UserCardProps) {
   const { followedUsers: followed, toggleFollow } = useContext(SelfContext);
 
   return (
-    <article onClick={() => navigate(`/user/${user.id}`)}>
-      <div>
-        <img />
+    <article className="user-card" onClick={() => navigate(`/user/${user.id}`)}>
+      <div className="user-card-info">
+        <img className="user-card-image" />
         <div>
-          <h3>
+          <h3 className="user-card-name">
             {user.firstName} {user.lastName}
           </h3>
           <span>{user.username}</span>
         </div>
       </div>
-      <button onClick={() => toggleFollow(user.id)}>
+      <button
+        className="user-card-follow-button"
+        onClick={event => {
+          event.stopPropagation();
+          toggleFollow(user.id);
+        }}
+      >
         {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
       </button>
     </article>
