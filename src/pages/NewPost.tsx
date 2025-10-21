@@ -53,32 +53,34 @@ function NewPost() {
   }
 
   return (
-    <div className='page'>
+    <div className="page">
       <Header />
-      <main className='main-content'>
-        <section>
-          <div>
-            <h2>New Post</h2>
-            <form onSubmit={post}>
-              <div>
+      <main className="main-content">
+        <section className="section">
+          <div className="section-content">
+            <h2 className="heading">New Post</h2>
+            <form className="form" onSubmit={post}>
+              <div className="form-field">
                 <label htmlFor="title-input">Title</label>
                 <input
                   id="title-input"
+                  className="input"
                   value={titleValue}
                   onChange={event => setTitleValue(event.target.value)}
                   required
                 />
               </div>
-              <div>
+              <div className="form-field">
                 <label htmlFor="body-input">Body</label>
                 <textarea
                   id="body-input"
+                  className="input textarea"
                   value={bodyValue}
                   onChange={event => setBodyValue(event.target.value)}
                   required
                 />
               </div>
-              <div>
+              <div className="form-field">
                 <label htmlFor="tag-input">
                   Tags <span>(Optional)</span>
                 </label>
@@ -86,10 +88,12 @@ function NewPost() {
                   <>
                     <input
                       id="tag-input"
+                      className="input"
                       value={tagValue}
                       onChange={event => setTagValue(event.target.value)}
                     />
                     <button
+                      className="form-button"
                       type="button"
                       onClick={addTag}
                       disabled={!canAddTag}
@@ -106,16 +110,22 @@ function NewPost() {
                 ) : (
                   <span>You cannot add more than 10 tags.</span>
                 )}
-                <ul>
+                <ul className="tag-list">
                   {tagList.map(tag => (
-                    <li key={tag} onClick={() => removeTag(tag)}>
+                    <li
+                      className="tag removable-tag"
+                      key={tag}
+                      onClick={() => removeTag(tag)}
+                    >
                       <XIcon />
                       {tag}
                     </li>
                   ))}
                 </ul>
               </div>
-              <button type="submit">Post</button>
+              <button className="form-button" type="submit">
+                Post
+              </button>
             </form>
           </div>
         </section>

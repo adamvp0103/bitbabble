@@ -365,3 +365,14 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+.textarea {
+  min-height: 8rem;
+}
+
+.removable-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
