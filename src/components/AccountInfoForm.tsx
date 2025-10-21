@@ -53,72 +53,81 @@ function AccountInfoForm() {
   }
 
   return (
-    <form onSubmit={applyChanges}>
-      <div>
+    <form className="form" onSubmit={applyChanges}>
+      <div className="form-field">
         <label htmlFor="first-name-input">First Name</label>
         <input
           id="first-name-input"
+          className="input"
           value={firstNameValue}
           onChange={event => setFirstNameValue(event.target.value)}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="last-name-input">Last Name</label>
         <input
           id="last-name-input"
+          className="input"
           value={lastNameValue}
           onChange={event => setLastNameValue(event.target.value)}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="username-input">Username</label>
         <input
           id="username-input"
+          className="input"
           value={usernameValue}
           onChange={event => setUsernameValue(event.target.value)}
         />
         {usernameTaken && <span>This username is already taken.</span>}
         {usernameHasSpaces && <span>Your username cannot contain spaces.</span>}
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="age-input">Age</label>
         <input
           id="age-input"
+          className="input"
           type="number"
           min={13}
           value={ageValue}
           onChange={event => setAgeValue(Number(event.target.value))}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="company-input">Company</label>
         <input
           id="company-input"
+          className="input"
           value={companyValue}
           onChange={event => setCompanyValue(event.target.value)}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="position-input">Position</label>
         <input
           id="position-input"
+          className="input"
           value={positionValue}
           onChange={event => setPositionValue(event.target.value)}
         />
       </div>
-      <div>
+      <div className="form-field">
         <label htmlFor="university-input">College/University</label>
         <input
           id="university-input"
+          className="input"
           value={universityValue}
           onChange={event => setUniversityValue(event.target.value)}
         />
       </div>
-      <div>
-        <button type="button" onClick={resetFields}>
+      <div className="form-buttons">
+        <button className="form-button" type="button" onClick={resetFields}>
           Reset Fields
         </button>
-        <button type="submit">Apply Changes</button>
+        <button className="form-button" type="submit">
+          Apply Changes
+        </button>
       </div>
     </form>
   );

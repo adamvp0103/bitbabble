@@ -25,35 +25,36 @@ function Account() {
     <div className="page">
       <Header />
       <main className="main-content">
-        <section>
-          <div>
-            <img />
-            <div>
-              <span>
+        <section className="account-info-section">
+          <div className="section-content">
+            <img className="account-image" />
+            <div className="account-name-and-username">
+              <span className="account-name">
                 {self.firstName} {self.lastName}
               </span>
               <span>{self.username}</span>
             </div>
-            <div>
-              <div>
+            <div className="account-stats">
+              <div className="account-stat">
                 <AgeIcon />
                 <span>{self.age} years old</span>
               </div>
-              <div>
+              <div className="account-stat">
                 <OccupationIcon />
                 <span>
                   {self.company.title} at {self.company.name}
                 </span>
               </div>
-              <div>
+              <div className="account-stat">
                 <EducationIcon />
                 <span>Studied at {self.university}</span>
               </div>
             </div>
           </div>
         </section>
-        <section>
-          <div>
+        <section className="section">
+          <div className="section-content">
+            <h2 className="heading">Edit Info</h2>
             <AccountInfoForm />
           </div>
         </section>
