@@ -25,26 +25,29 @@ function PostCard({ post }: PostCardProps) {
   }
 
   return (
-    <article onClick={() => navigate(`/post/${post.id}`)}>
-      <h3>{post.title}</h3>
+    <article className="post-card" onClick={() => navigate(`/post/${post.id}`)}>
+      <h3 className="card-title">{post.title}</h3>
       {user ? (
-        <div>
-          <img />
-          <span>
+        <div className="post-card-author">
+          <img className="post-card-author-image" />
+          <span className="post-card-author-name">
             {user.firstName} {user.lastName}
           </span>
         </div>
       ) : (
-        <span>User not found</span>
+        <span className="post-card-author">User not found</span>
       )}
-      <p>{post.body}</p>
-      <ul>
+      <p className="paragraph">{post.body}</p>
+      <ul className="tag-list">
         {post.tags.map(tag => (
-          <li key={tag}>{tag.toUpperCase()}</li>
+          <li className="tag" key={tag}>
+            {tag.toUpperCase()}
+          </li>
         ))}
       </ul>
-      <div>
-        <div
+      <div className="post-card-reactions">
+        <button
+          className="reaction-button"
           style={{ color: isLiked(post.id) ? 'green' : 'black' }}
           onClick={event => {
             event.stopPropagation();
@@ -53,8 +56,9 @@ function PostCard({ post }: PostCardProps) {
         >
           <LikeIcon />
           {post.reactions.likes}
-        </div>
-        <div
+        </button>
+        <button
+          className="reaction-button"
           style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
           onClick={event => {
             event.stopPropagation();
@@ -63,7 +67,7 @@ function PostCard({ post }: PostCardProps) {
         >
           <DislikeIcon />
           {post.reactions.dislikes}
-        </div>
+        </button>
       </div>
     </article>
   );

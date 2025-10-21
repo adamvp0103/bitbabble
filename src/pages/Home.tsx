@@ -35,9 +35,9 @@ function Home() {
         </section>
         {/* Render 'Following' section only if a followed user has a post */}
         {followedPosts.length > 0 && (
-          <section>
-            <div>
-              <h2>Following</h2>
+          <section className="section">
+            <div className="section-content">
+              <h2 className="heading">Following</h2>
               <ul>
                 {followedPosts.slice(0, followingShowAmount).map(post => (
                   <li key={post.id}>
@@ -51,10 +51,10 @@ function Home() {
             </div>
           </section>
         )}
-        <section>
-          <div>
-            <h2>All Posts</h2>
-            <ul>
+        <section className="section">
+          <div className="section-content">
+            <h2 className="heading">All Posts</h2>
+            <ul className="card-list">
               {posts.slice(0, allPostsShowAmount).map(post => (
                 <li key={post.id}>
                   <PostCard post={post} />
@@ -62,7 +62,9 @@ function Home() {
               ))}
             </ul>
             {posts.length > allPostsShowAmount && (
-              <button onClick={showMoreAllPosts}>Show More</button>
+              <button className="show-more-button" onClick={showMoreAllPosts}>
+                Show More
+              </button>
             )}
           </div>
         </section>
