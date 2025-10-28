@@ -29,9 +29,9 @@ function Account() {
           <div className="section-content">
             <img className="account-image" />
             <div className="account-name-and-username">
-              <span className="account-name">
+              <h2 className="account-name">
                 {self.firstName} {self.lastName}
-              </span>
+              </h2>
               <span>{self.username}</span>
             </div>
             <div className="account-stats">

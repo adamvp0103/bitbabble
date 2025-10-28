@@ -21,9 +21,9 @@ function PostDetail() {
     <div className="page">
       <Header />
       <main className="main-content">
-        <section>
-          <div>
-            <h2>Post not found</h2>
+        <section className="section">
+          <div className="section-content">
+            <h2 className="heading">Post not found</h2>
           </div>
         </section>
       </main>
@@ -53,25 +53,29 @@ function PostDetail() {
     <div className="page">
       <Header />
       <main className="main-content">
-        <section>
-          <div>
-            <h2>{post.title}</h2>
-            <div>
+        <section className="section">
+          <div className="section-content">
+            <h2 className="heading">{post.title}</h2>
+            <div className="user-and-reactions">
               {user ? (
-                <div onClick={() => navigate(`/user/${user.id}`)}>
-                  <img />
+                <div
+                  className="user-card-info"
+                  onClick={() => navigate(`/user/${user.id}`)}
+                >
+                  <img className="user-card-image" />
                   <div>
-                    <span>
+                    <h3 className="user-card-name">
                       {user.firstName} {user.lastName}
-                    </span>
+                    </h3>
                     <span>{user.username}</span>
                   </div>
                 </div>
               ) : (
                 <span>User not found</span>
               )}
-              <div>
+              <div className="post-detail-reactions">
                 <div
+                  className="reaction-button"
                   style={{ color: isLiked(post.id) ? 'green' : 'black' }}
                   onClick={event => {
                     event.stopPropagation();
@@ -82,6 +86,7 @@ function PostDetail() {
                   {post.reactions.likes}
                 </div>
                 <div
+                  className="reaction-button"
                   style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
                   onClick={event => {
                     event.stopPropagation();
@@ -93,12 +98,14 @@ function PostDetail() {
                 </div>
               </div>
             </div>
-            <ul>
+            <ul className="tag-list">
               {post.tags.map(tag => (
-                <li key={tag}>{tag.toUpperCase()}</li>
+                <li className="tag" key={tag}>
+                  {tag.toUpperCase()}
+                </li>
               ))}
             </ul>
-            <p>{post.body}</p>
+            <p className="post-detail-paragraph">{post.body}</p>
           </div>
         </section>
       </main>

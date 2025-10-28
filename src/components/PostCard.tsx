@@ -28,7 +28,13 @@ function PostCard({ post }: PostCardProps) {
     <article className="post-card" onClick={() => navigate(`/post/${post.id}`)}>
       <h3 className="card-title">{post.title}</h3>
       {user ? (
-        <div className="post-card-author">
+        <div
+          className="post-card-author"
+          onClick={event => {
+            event.stopPropagation();
+            navigate(`/user/${user.id}`);
+          }}
+        >
           <img className="post-card-author-image" />
           <span className="post-card-author-name">
             {user.firstName} {user.lastName}
@@ -37,7 +43,7 @@ function PostCard({ post }: PostCardProps) {
       ) : (
         <span className="post-card-author">User not found</span>
       )}
-      <p className="paragraph">{post.body}</p>
+      <p className="post-card-paragraph">{post.body}</p>
       <ul className="tag-list">
         {post.tags.map(tag => (
           <li className="tag" key={tag}>

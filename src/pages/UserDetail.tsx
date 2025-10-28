@@ -29,56 +29,63 @@ function UserDetail() {
     <div className="page">
       <Header />
       <main className="main-content">
-        <section>
+        <section className="account-info-section">
           {user ? (
-            <div>
-              <img />
-              <div>
-                <h2>
-                  {user.firstName} {user.lastName}
-                </h2>
-                <span>{user.username}</span>
-                <button onClick={() => toggleFollow(user.id)}>
+            <div className="section-content">
+              <img className="account-image" />
+              <div className="account-name-and-follow-button">
+                <div className="account-name-and-username">
+                  <h2 className="account-name">
+                    {user.firstName} {user.lastName}
+                  </h2>
+                  <span>{user.username}</span>
+                </div>
+                <button
+                  className="button"
+                  onClick={() => toggleFollow(user.id)}
+                >
                   {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
                 </button>
               </div>
-              <div>
-                <div>
+              <div className="account-stats">
+                <div className="account-stat">
                   <AgeIcon />
                   <span>{user.age} years old</span>
                 </div>
-                <div>
+                <div className="account-stat">
                   <OccupationIcon />
                   <span>
                     {user.company.title} at {user.company.name}
                   </span>
                 </div>
-                <div>
+                <div className="account-stat">
                   <EducationIcon />
                   <span>Studied at {user.university}</span>
                 </div>
               </div>
             </div>
           ) : (
-            <div>
-              <h2>User not found</h2>
+            <div className="section-content">
+              <h2 className="heading">User not found</h2>
             </div>
           )}
         </section>
-        {/* Render 'Your Posts' section only if user has posted */}
+        {/* Render 'User's Posts' section only if user has posted */}
         {user && userPosts.length > 0 && (
-          <section>
-            <div>
-              <h2>{user.firstName}'s Posts</h2>
-              <ul>
+          <section className="section">
+            <div className="section-content">
+              <h2 className="heading">{user.firstName}'s Posts</h2>
+              <ul className="card-list">
                 {userPosts.slice(0, postsShowAmount).map(post => (
-                  <li key={post.id}>
+                  <li className="post-card" key={post.id}>
                     <PostCard post={post} />
                   </li>
                 ))}
               </ul>
               {userPosts.length > postsShowAmount && (
-                <button onClick={showMorePosts}>Show More</button>
+                <button className="show-more-button" onClick={showMorePosts}>
+                  Show More
+                </button>
               )}
             </div>
           </section>
