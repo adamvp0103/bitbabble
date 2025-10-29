@@ -31,21 +31,23 @@ function UserDetail() {
       <main className="main-content">
         <section className="account-info-section">
           {user ? (
-            <div className="section-content">
-              <img className="account-image" />
-              <div className="account-name-and-follow-button">
-                <div className="account-name-and-username">
-                  <h2 className="account-name">
-                    {user.firstName} {user.lastName}
-                  </h2>
-                  <span>{user.username}</span>
+            <div className="account-section-content">
+              <div className="account-image-and-names">
+                <img className="account-image" />
+                <div className="account-name-and-follow-button">
+                  <div className="account-name-and-username">
+                    <h2 className="account-name">
+                      {user.firstName} {user.lastName}
+                    </h2>
+                    <span>{user.username}</span>
+                  </div>
+                  <button
+                    className="button"
+                    onClick={() => toggleFollow(user.id)}
+                  >
+                    {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
+                  </button>
                 </div>
-                <button
-                  className="button"
-                  onClick={() => toggleFollow(user.id)}
-                >
-                  {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
-                </button>
               </div>
               <div className="account-stats">
                 <div className="account-stat">

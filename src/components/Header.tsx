@@ -16,7 +16,7 @@ function Header() {
       <button className="nav-button" onClick={() => setShowNav(!showNav)}>
         {showNav ? <XIcon /> : <MenuIcon />}
       </button>
-      <nav className="nav" style={{ display: showNav ? 'block' : 'none' }}>
+      <nav className={`nav ${showNav ? '' : 'hidden-nav'}`}>
         <div className="nav-links">
           <Link to="/">
             <span className="nav-link">Home</span>

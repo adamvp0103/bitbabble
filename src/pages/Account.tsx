@@ -26,13 +26,15 @@ function Account() {
       <Header />
       <main className="main-content">
         <section className="account-info-section">
-          <div className="section-content">
-            <img className="account-image" />
-            <div className="account-name-and-username">
-              <h2 className="account-name">
-                {self.firstName} {self.lastName}
-              </h2>
-              <span>{self.username}</span>
+          <div className="account-section-content">
+            <div className="account-image-and-names">
+              <img className="account-image" />
+              <div className="account-name-and-username">
+                <h2 className="account-name">
+                  {self.firstName} {self.lastName}
+                </h2>
+                <span>{self.username}</span>
+              </div>
             </div>
             <div className="account-stats">
               <div className="account-stat">
