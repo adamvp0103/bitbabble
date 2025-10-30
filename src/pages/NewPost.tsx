@@ -101,14 +101,20 @@ function NewPost() {
                       Add Tag
                     </button>
                     {/[^a-zA-Z]/.test(tagValue.replaceAll(' ', '')) && (
-                      <span>Tags can only contain letters.</span>
+                      <span className="invalid-input-message">
+                        Tags can only contain letters.
+                      </span>
                     )}
                     {tagList.includes(formatTag(tagValue)) && (
-                      <span>You've already added this tag.</span>
+                      <span className="invalid-input-message">
+                        You've already added this tag.
+                      </span>
                     )}
                   </>
                 ) : (
-                  <span>You cannot add more than 10 tags.</span>
+                  <span className="invalid-input-message">
+                    You cannot add more than 10 tags.
+                  </span>
                 )}
                 <ul className="tag-list">
                   {tagList.map(tag => (
@@ -123,7 +129,7 @@ function NewPost() {
                   ))}
                 </ul>
               </div>
-              <button className="form-button" type="submit">
+              <button className="form-button submit-button" type="submit">
                 Post
               </button>
             </form>

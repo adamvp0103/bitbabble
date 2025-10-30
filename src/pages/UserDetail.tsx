@@ -42,7 +42,9 @@ function UserDetail() {
                     <span>{user.username}</span>
                   </div>
                   <button
-                    className="button"
+                    className={`follow-button user-detail-follow-button ${
+                      followed.includes(user.id) ? 'active' : ''
+                    }`}
                     onClick={() => toggleFollow(user.id)}
                   >
                     {followed.includes(user.id) ? 'Unfollow' : 'Follow'}
@@ -79,7 +81,7 @@ function UserDetail() {
               <h2 className="heading">{user.firstName}'s Posts</h2>
               <ul className="card-list">
                 {userPosts.slice(0, postsShowAmount).map(post => (
-                  <li className="post-card" key={post.id}>
+                  <li key={post.id}>
                     <PostCard post={post} />
                   </li>
                 ))}

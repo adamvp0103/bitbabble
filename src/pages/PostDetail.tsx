@@ -55,7 +55,7 @@ function PostDetail() {
       <main className="main-content">
         <section className="section">
           <div className="section-content">
-            <h2 className="heading">{post.title}</h2>
+            <h2 className="heading post-title">{post.title}</h2>
             <div className="user-and-reactions">
               {user ? (
                 <div
@@ -75,8 +75,9 @@ function PostDetail() {
               )}
               <div className="post-detail-reactions">
                 <div
-                  className="reaction-button"
-                  style={{ color: isLiked(post.id) ? 'green' : 'black' }}
+                  className={`reaction-button like-button ${
+                    isLiked(post.id) ? 'active' : ''
+                  }`}
                   onClick={event => {
                     event.stopPropagation();
                     toggleLiked(post.id);
@@ -86,8 +87,9 @@ function PostDetail() {
                   {post.reactions.likes}
                 </div>
                 <div
-                  className="reaction-button"
-                  style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
+                  className={`reaction-button dislike-button ${
+                    isDisliked(post.id) ? 'active' : ''
+                  }`}
                   onClick={event => {
                     event.stopPropagation();
                     toggleDisliked(post.id);

@@ -26,23 +26,25 @@ function PostCard({ post }: PostCardProps) {
 
   return (
     <article className="post-card" onClick={() => navigate(`/post/${post.id}`)}>
-      <h3 className="card-title">{post.title}</h3>
-      {user ? (
-        <div
-          className="post-card-author"
-          onClick={event => {
-            event.stopPropagation();
-            navigate(`/user/${user.id}`);
-          }}
-        >
-          <img className="post-card-author-image" />
-          <span className="post-card-author-name">
-            {user.firstName} {user.lastName}
-          </span>
-        </div>
-      ) : (
-        <span className="post-card-author">User not found</span>
-      )}
+      <div className="post-title-and-author">
+        <h3 className="card-title">{post.title}</h3>
+        {user ? (
+          <div
+            className="post-card-author"
+            onClick={event => {
+              event.stopPropagation();
+              navigate(`/user/${user.id}`);
+            }}
+          >
+            <img className="post-card-author-image" />
+            <span className="post-card-author-name">
+              {user.firstName} {user.lastName}
+            </span>
+          </div>
+        ) : (
+          <span className="post-card-author">User not found</span>
+        )}
+      </div>
       <p className="post-card-paragraph">{post.body}</p>
       <div className="post-card-tags-and-reactions">
         <ul className="tag-list">
@@ -54,8 +56,9 @@ function PostCard({ post }: PostCardProps) {
         </ul>
         <div className="post-card-reactions">
           <button
-            className="reaction-button"
-            style={{ color: isLiked(post.id) ? 'green' : 'black' }}
+            className={`reaction-button like-button ${
+              isLiked(post.id) ? 'active' : ''
+            }`}
             onClick={event => {
               event.stopPropagation();
               toggleLiked(post.id);
@@ -65,8 +68,9 @@ function PostCard({ post }: PostCardProps) {
             {post.reactions.likes}
           </button>
           <button
-            className="reaction-button"
-            style={{ color: isDisliked(post.id) ? 'red' : 'black' }}
+            className={`reaction-button dislike-button ${
+              isDisliked(post.id) ? 'active' : ''
+            }`}
             onClick={event => {
               event.stopPropagation();
               toggleDisliked(post.id);

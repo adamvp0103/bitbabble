@@ -24,7 +24,9 @@ function UserCard({ user }: UserCardProps) {
         </div>
       </div>
       <button
-        className="user-card-follow-button"
+        className={`follow-button ${
+          followed.includes(user.id) ? 'active' : ''
+        }`}
         onClick={event => {
           event.stopPropagation();
           toggleFollow(user.id);

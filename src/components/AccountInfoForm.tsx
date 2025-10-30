@@ -122,10 +122,14 @@ function AccountInfoForm() {
         />
       </div>
       <div className="form-buttons">
-        <button className="form-button" type="button" onClick={resetFields}>
+        <button
+          className="form-button reset-button"
+          type="button"
+          onClick={resetFields}
+        >
           Reset Fields
         </button>
-        <button className="form-button" type="submit">
+        <button className="form-button submit-button" type="submit">
           Apply Changes
         </button>
       </div>
