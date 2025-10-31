@@ -33,7 +33,7 @@ function UserDetail() {
           {user ? (
             <div className="account-section-content">
               <div className="account-image-and-names">
-                <img className="account-image" />
+                <img className="account-image" src={user.image} />
                 <div className="account-name-and-follow-button">
                   <div className="account-name-and-username">
                     <h2 className="account-name">

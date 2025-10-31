@@ -44,6 +44,7 @@ function AccountInfoForm() {
       lastName: cleanInput(lastNameValue),
       age: ageValue,
       username: usernameValue.trim().toLowerCase(),
+      image: self.image,
       university: cleanInput(universityValue),
       company: {
         name: cleanInput(companyValue),

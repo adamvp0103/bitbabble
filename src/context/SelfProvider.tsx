@@ -1,6 +1,7 @@
 import React, { useContext, useState, type ReactNode } from 'react';
 import type { User } from '../data/types';
 import { PostContext } from './PostProvider';
+import blue from '../assets/blue.png';
 
 interface SelfContextType {
   self: User;
@@ -20,6 +21,7 @@ export const SelfContext = React.createContext<SelfContextType>({
     lastName: 'Doe',
     age: 42,
     username: 'john.doe.123',
+    image: blue,
     university: 'Some University',
     company: {
       name: 'Some Company',
@@ -49,6 +51,7 @@ function SelfProvider({ children }: SelfProviderProps) {
     lastName: 'Doe',
     age: 42,
     username: 'john.doe.123',
+    image: blue,
     university: 'Some University',
     company: {
       name: 'Some Company',

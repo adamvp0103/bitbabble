@@ -1,5 +1,14 @@
 import React, { useEffect, useState, type ReactNode } from 'react';
 import type { User } from '../data/types';
+import red from '../assets/red.png';
+import orange from '../assets/orange.png';
+import yellow from '../assets/yellow.png';
+import green from '../assets/green.png';
+import blue from '../assets/blue.png';
+import purple from '../assets/purple.png';
+import pink from '../assets/pink.png';
+
+const images = [red, orange, yellow, green, blue, purple, pink];
 
 interface UserContextType {
   users: User[];
@@ -32,7 +41,14 @@ function UserProvider({ children }: UserProviderProps) {
           throw new Error(`Error fetching users - status: ${response.status}`);
         }
         const data = await response.json();
-        setUsers(data.users);
+        const users: User[] = data.users;
+        // setUsers(data.users);
+        setUsers(
+          users.map(user => ({
+            ...user,
+            image: images[Math.floor(Math.random() * images.length)]
+          }))
+        );
       } catch (error: any) {
         console.error(error.message);
       }
@@ -42,7 +58,9 @@ function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ users, getUser }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ users, getUser }}>
+      {children}
+    </UserContext.Provider>
   );
 }
 

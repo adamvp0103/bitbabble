@@ -15,7 +15,7 @@ function UserCard({ user }: UserCardProps) {
   return (
     <article className="user-card" onClick={() => navigate(`/user/${user.id}`)}>
       <div className="user-card-info">
-        <img className="user-card-image" />
+        <img className="user-card-image" src={user.image} />
         <div>
           <h3 className="user-card-name">
             {user.firstName} {user.lastName}

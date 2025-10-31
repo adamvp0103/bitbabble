@@ -28,7 +28,7 @@ function Account() {
         <section className="account-info-section">
           <div className="account-section-content">
             <div className="account-image-and-names">
-              <img className="account-image" />
+              <img className="account-image" src={self.image} />
               <div className="account-name-and-username">
                 <h2 className="account-name">
                   {self.firstName} {self.lastName}
@@ -62,10 +62,10 @@ function Account() {
         </section>
         {/* Render 'Your Posts' section only if user has posted */}
         {posts.length > 0 && (
-          <section>
-            <div>
-              <h2>Your Posts</h2>
-              <ul>
+          <section className="section">
+            <div className="section-content">
+              <h2 className="heading">Your Posts</h2>
+              <ul className="card-list">
                 {posts.slice(0, yourPostsShowAmount).map(post => (
                   <li key={post.id}>
                     <PostCard post={post} />
@@ -73,7 +73,12 @@ function Account() {
                 ))}
               </ul>
               {posts.length > yourPostsShowAmount && (
-                <button onClick={showMoreYourPosts}>Show More</button>
+                <button
+                  className="show-more-button"
+                  onClick={showMoreYourPosts}
+                >
+                  Show More
+                </button>
               )}
             </div>
           </section>

@@ -33,10 +33,14 @@ function PostCard({ post }: PostCardProps) {
             className="post-card-author"
             onClick={event => {
               event.stopPropagation();
-              navigate(`/user/${user.id}`);
+              if (user.id === self.id) {
+                navigate('/account');
+              } else {
+                navigate(`/user/${user.id}`);
+              }
             }}
           >
-            <img className="post-card-author-image" />
+            <img className="post-card-author-image" src={user.image} />
             <span className="post-card-author-name">
               {user.firstName} {user.lastName}
             </span>

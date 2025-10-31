@@ -17,6 +17,7 @@ export interface User {
   lastName: string;
   age: number;
   username: string;
+  image: string;
   university: string;
   company: {
     name: string;

@@ -38,7 +38,7 @@ function Home() {
           <section className="section">
             <div className="section-content">
               <h2 className="heading">Following</h2>
-              <ul>
+              <ul className="card-list">
                 {followedPosts.slice(0, followingShowAmount).map(post => (
                   <li key={post.id}>
                     <PostCard post={post} />

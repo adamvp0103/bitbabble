@@ -62,7 +62,7 @@ function PostDetail() {
                   className="user-card-info"
                   onClick={() => navigate(`/user/${user.id}`)}
                 >
-                  <img className="user-card-image" />
+                  <img className="user-card-image" src={user.image} />
                   <div>
                     <h3 className="user-card-name">
                       {user.firstName} {user.lastName}
