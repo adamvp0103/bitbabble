@@ -138,6 +138,11 @@
   font-weight: normal;
 }
 
+.rule {
+  border: none;
+  border-top: 2px dotted var(--accent-color);
+}
+
 .section {
   display: flex;
   justify-content: center;

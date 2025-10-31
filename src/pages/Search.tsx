@@ -80,60 +80,66 @@ function Search() {
           </div>
         </section>
         {hasSearched && (
-          <section className="section">
-            <div className="section-content">
-              <h2 className="heading">Post Results</h2>
-              {postResults.length > 0 ? (
-                <>
-                  <ul className="card-list">
-                    {postResults.slice(0, postResultsShowAmount).map(result => (
-                      <li key={result.id}>
-                        <PostCard post={result} />
-                      </li>
-                    ))}
-                  </ul>
-                  {postResults.length > postResultsShowAmount && (
-                    <button
-                      className="show-more-button"
-                      onClick={showMorePostResults}
-                    >
-                      Show More
-                    </button>
-                  )}
-                </>
-              ) : (
-                <span className="no-results-message">None.</span>
-              )}
-            </div>
-          </section>
+          <>
+            <hr className="rule" />
+            <section className="section">
+              <div className="section-content">
+                <h2 className="heading">Post Results</h2>
+                {postResults.length > 0 ? (
+                  <>
+                    <ul className="card-list">
+                      {postResults.slice(0, postResultsShowAmount).map(result => (
+                        <li key={result.id}>
+                          <PostCard post={result} />
+                        </li>
+                      ))}
+                    </ul>
+                    {postResults.length > postResultsShowAmount && (
+                      <button
+                        className="show-more-button"
+                        onClick={showMorePostResults}
+                      >
+                        Show More
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <span className="no-results-message">None.</span>
+                )}
+              </div>
+            </section>
+          </>
         )}
         {hasSearched && (
-          <section className="section">
-            <div className="section-content">
-              <h2 className="heading">User Results</h2>
-              {userResults.length > 0 ? (
-                <>
-                  <ul className="card-list">
-                    {userResults.slice(0, userResultsShowAmount).map(result => (
-                      <li key={result.id}>
-                        <UserCard user={result} />
-                      </li>
-                    ))}
-                  </ul>
-                  {userResults.length > userResultsShowAmount && (
-                    <button
-                      className="show-more-button"
-                      onClick={showMoreUserResults}
-                    >
-                      Show More
-                    </button>
-                  )}
-                </>
-              ) : (
-                <span className="no-results-message">None.</span>
-              )}
-            </div>
-          </section>
+          <>
+            <hr className="rule" />
+            <section className="section">
+              <div className="section-content">
+                <h2 className="heading">User Results</h2>
+                {userResults.length > 0 ? (
+                  <>
+                    <ul className="card-list">
+                      {userResults.slice(0, userResultsShowAmount).map(result => (
+                        <li key={result.id}>
+                          <UserCard user={result} />
+                        </li>
+                      ))}
+                    </ul>
+                    {userResults.length > userResultsShowAmount && (
+                      <button
+                        className="show-more-button"
+                        onClick={showMoreUserResults}
+                      >
+                        Show More
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <span className="no-results-message">None.</span>
+                )}
+              </div>
+            </section>
+          </>
         )}
       </main>
       <Footer />

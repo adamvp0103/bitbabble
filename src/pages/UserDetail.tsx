@@ -76,23 +76,26 @@ function UserDetail() {
         </section>
         {/* Render 'User's Posts' section only if user has posted */}
         {user && userPosts.length > 0 && (
-          <section className="section">
-            <div className="section-content">
-              <h2 className="heading">{user.firstName}'s Posts</h2>
-              <ul className="card-list">
-                {userPosts.slice(0, postsShowAmount).map(post => (
-                  <li key={post.id}>
-                    <PostCard post={post} />
-                  </li>
-                ))}
-              </ul>
-              {userPosts.length > postsShowAmount && (
-                <button className="show-more-button" onClick={showMorePosts}>
-                  Show More
-                </button>
-              )}
-            </div>
-          </section>
+          <>
+            <hr className="rule" />
+            <section className="section">
+              <div className="section-content">
+                <h2 className="heading">{user.firstName}'s Posts</h2>
+                <ul className="card-list">
+                  {userPosts.slice(0, postsShowAmount).map(post => (
+                    <li key={post.id}>
+                      <PostCard post={post} />
+                    </li>
+                  ))}
+                </ul>
+                {userPosts.length > postsShowAmount && (
+                  <button className="show-more-button" onClick={showMorePosts}>
+                    Show More
+                  </button>
+                )}
+              </div>
+            </section>
+          </>
         )}
       </main>
       <Footer />

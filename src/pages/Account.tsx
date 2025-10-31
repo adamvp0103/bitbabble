@@ -54,6 +54,7 @@ function Account() {
             </div>
           </div>
         </section>
+        <hr className="rule" />
         <section className="section">
           <div className="section-content">
             <h2 className="heading">Edit Info</h2>
@@ -62,26 +63,29 @@ function Account() {
         </section>
         {/* Render 'Your Posts' section only if user has posted */}
         {posts.length > 0 && (
-          <section className="section">
-            <div className="section-content">
-              <h2 className="heading">Your Posts</h2>
-              <ul className="card-list">
-                {posts.slice(0, yourPostsShowAmount).map(post => (
-                  <li key={post.id}>
-                    <PostCard post={post} />
-                  </li>
-                ))}
-              </ul>
-              {posts.length > yourPostsShowAmount && (
-                <button
-                  className="show-more-button"
-                  onClick={showMoreYourPosts}
-                >
-                  Show More
-                </button>
-              )}
-            </div>
-          </section>
+          <>
+            <hr className="rule" />
+            <section className="section">
+              <div className="section-content">
+                <h2 className="heading">Your Posts</h2>
+                <ul className="card-list">
+                  {posts.slice(0, yourPostsShowAmount).map(post => (
+                    <li key={post.id}>
+                      <PostCard post={post} />
+                    </li>
+                  ))}
+                </ul>
+                {posts.length > yourPostsShowAmount && (
+                  <button
+                    className="show-more-button"
+                    onClick={showMoreYourPosts}
+                  >
+                    Show More
+                  </button>
+                )}
+              </div>
+            </section>
+          </>
         )}
       </main>
       <Footer />
